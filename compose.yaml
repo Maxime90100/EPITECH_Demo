@@ -1,0 +1,44 @@
+version: '1'
+services:
+  server:
+    container_name: demo_server
+    environment:
+      SERVER_PORT: 3000
+      SERVER_HOSTNAME: demo_server
+      SERVER_URL: http://demo_server:3000
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - network
+
+  client:
+    container_name: demo_client
+    depends_on:
+      - server
+    environment:
+      VUE_APP_PORT: 8080
+      VUE_APP_HOSTNAME: demo_client
+      SERVER_URL: http://demo_server:3000
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - network
+
+  sensors:
+    container_name: demo_sensors
+    environment:
+      SERVER_URL: http://demo_server:3000
+    build:
+      context: ./sensors
+      dockerfile: Dockerfile
+    networks:
+      - network
+
+networks:
+  network:
