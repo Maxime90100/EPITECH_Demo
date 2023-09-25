@@ -1,4 +1,4 @@
-import './assets/main.css';
+import './assets/css/main.css';
 import { createApp } from 'vue';
 import App from './App.vue';
 import vuetify from "@/plugins/vuetify";
@@ -12,7 +12,7 @@ app.use(vuetify);
 app.use(router);
 app.use(store);
 
-const socket = io.connect("http://localhost:3000", {
+const socket = io.connect(process.env.SERVER_URL, {
     transports: ['websocket', 'polling'],
 });
 

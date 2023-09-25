@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const API = axios.create({
-    baseURL: `http://127.0.0.1:3000`
+    baseURL: process.env.SERVER_URL
 });
 
 API.interceptors.request.use(
@@ -18,21 +18,16 @@ API.interceptors.request.use(
 
 API.interceptors.response.use(
     res => {
-        /*console.log("REQUEST SUCCESS")
-        console.log(res)*/
         return res
     },
     error => {
-        /*console.log("REQUEST FAILED")
-        console.log(error)*/
         return Promise.reject(error)
     }
 )
 
 function handleError(serviceName, err) {
+    console.error(err);
     if (err.response) {
-        /*console.log("SERVICE ERROR:" + serviceName);
-        console.log(err.response)*/
         return {
             data: {
                 error: 1,
@@ -42,8 +37,6 @@ function handleError(serviceName, err) {
         };
     }
     else if (err.request) {
-        /*console.log("NETWORK ERROR:" + serviceName);
-        console.log(err.request)*/
         return {
             data: {
                 error: 1,
@@ -52,7 +45,6 @@ function handleError(serviceName, err) {
         };
     }
     else {
-        //console.log("UNKNOWN ERROR:" + serviceName);
         return {
             data: {
                 error: 1,
