@@ -1,0 +1,13 @@
+{
+  "name": "demo_epitech",
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install && cd ../sensors && npm install && cd ..",
+    "start:all":  "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\" \"cd sensors && npm run start\""
+  },
+  "author": "Maxime THEVENEAU",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  }
+}

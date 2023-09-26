@@ -34,7 +34,7 @@ const lightTheme = {
         surface: '#dcd8d8',
         primary: '#004479',
         'primary-text': "#ffffff",
-        secondary: '#65849b',
+        secondary: '#aecce1',
         error: '#B00020',
         info: '#2196F3',
         success: '#4CAF50',
@@ -46,7 +46,7 @@ const vuetify = createVuetify({
     components,
     directives,
     theme: {
-        defaultTheme: localStorage.getItem('theme') || 'lightTheme',
+        defaultTheme: localStorage.getItem('theme') || 'darkTheme',
         themes: {
             lightTheme,
             darkTheme,

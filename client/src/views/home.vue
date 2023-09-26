@@ -1,12 +1,20 @@
 <script>
+import textSlider from "@/components/animations/text/textSlider.vue";
 export default {
-
+  components:{
+    textSlider
+  },
 }
 </script>
 
 <template>
   <div>
-    <h1>Page d'accueil</h1>
+    <textSlider
+        style="margin-top: 20px"
+          :first="{text:'Maxime',color:'#004479'}"
+          :second="{text:'Développeur',color:'#004479'}"
+          :third="{text:'Motivé',color:'#b00000'}"
+      />
   </div>
 </template>
 

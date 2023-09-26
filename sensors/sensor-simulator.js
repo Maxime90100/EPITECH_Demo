@@ -26,6 +26,7 @@ function generateDataHumidity(humidityMin, humidityMax, delta){
 setInterval(() => {
     const temperature = generateDataTemperature(-10,30,10);
     const humidity = generateDataHumidity(25,80,15);
-    console.log({temperature:temperature, humidity:humidity});
-    socket.emit("sensorData", { temperature, humidity });
+    const data = {temperature:temperature, humidity:humidity, timestamp:Date.now()}
+    console.log(data);
+    socket.emit("sensorData", data);
 }, 5000);

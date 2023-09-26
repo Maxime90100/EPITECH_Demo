@@ -1,13 +1,10 @@
 {
   "name": "sensors",
   "version": "1.0.0",
-  "description": "",
   "main": "sensor-simulator.js",
   "scripts": {
     "start": "node sensor-simulator.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
     "socket.io-client": "^4.7.2"

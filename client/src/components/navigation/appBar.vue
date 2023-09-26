@@ -22,10 +22,18 @@ export default {
         density="compact"
     >
       <template v-slot:prepend>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-avatar
+            color="secondary"
+            rounded="0"
+        >
+          <v-img
+              src="src/assets/images/logo.jpg"
+              alt="Maxime THEVENEAU"
+          ></v-img>
+        </v-avatar>
       </template>
 
-      <v-app-bar-title>Demo {<b>EPITECH</b>}</v-app-bar-title>
+      <v-app-bar-title>Demo {<b> EPITECH. </b>}</v-app-bar-title>
 
       <template v-slot:append>
         <v-btn

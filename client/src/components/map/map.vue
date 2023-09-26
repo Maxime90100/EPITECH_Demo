@@ -220,10 +220,9 @@ export default {
           :text="showPop ? 'carte' : 'démographie'"
           v-on:click="showPop = !showPop"
       />
-      <div v-if="showPop">
+      <div v-if="showPop && populationLegend">
         <h1>Population :</h1>
         <v-rating
-            v-if="populationLegend"
             v-model="Object.keys(populationLegend).length"
             :length="Object.keys(populationLegend).length"
             :item-labels="Object.values(populationLegend)"
