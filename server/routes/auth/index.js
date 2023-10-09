@@ -2,7 +2,7 @@ import express from "express";
 import googleAuthRouter from "./google-auth.js";
 import User from "../../models/user.js";
 import jwt from 'jsonwebtoken';
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const authRouter = express.Router();
 

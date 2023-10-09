@@ -16,11 +16,20 @@ services:
     depends_on:
       - mongodb
     environment:
-      SERVER_PORT: 3000
+      SERVER_PORT: ${SERVER_PORT}
       SERVER_HOSTNAME: demo_server
-      SERVER_URL: http://demo_server:3000
-      MONGO_URI: "mongodb://mongodb:27017/demo_epitech"
-      API_GEOGRAPHIE: https://geo.api.gouv.fr
+      SERVER_URL: http://demo_server:${SERVER_PORT}
+
+      MONGO_PORT: ${MONGO_PORT}
+      MONGO_HOSTNAME: demo_mongo
+      MONGO_COLLECTION: ${MONGO_COLLECTION}
+
+      JWT_SECRET: ${JWT_SECRET}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      GOOGLE_CALLBACK_URL: ${GOOGLE_CALLBACK_URL}
+
+      API_GEOGRAPHIE: ${API_GEOGRAPHIE}
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -34,9 +43,9 @@ services:
     depends_on:
       - server
     environment:
-      VUE_APP_PORT: 8080
+      VUE_APP_PORT: ${VUE_APP_PORT}
       VUE_APP_HOSTNAME: demo_client
-      SERVER_URL: http://localhost:3000 #browser hostname
+      SERVER_URL: http://localhost:${SERVER_PORT} #browser hostname
     build:
       context: ./client
       dockerfile: Dockerfile
@@ -48,7 +57,7 @@ services:
   sensors:
     container_name: demo_sensors
     environment:
-      SERVER_URL: http://demo_server:3000
+      SERVER_URL: http://demo_server:${SERVER_PORT}
     build:
       context: ./sensors
       dockerfile: Dockerfile

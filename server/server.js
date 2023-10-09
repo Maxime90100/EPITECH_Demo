@@ -16,7 +16,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
-mongoose.connect(process.env.MONGO_URI, {
+const MONGO_URI = `mongodb://${process.env.MONGO_HOSTNAME}:${process.env.MONGO_PORT}/${process.env.MONGO_COLLECTION}`
+mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -44,10 +45,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors({
-    origin: process.env.VUE_APP_URL,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-}));
+app.use(cors());
 
 app.use('/', router);
 

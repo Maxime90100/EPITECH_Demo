@@ -36,9 +36,17 @@ npm run install:all
 SERVER_PORT=3000
 SERVER_HOSTNAME=127.0.0.1
 SERVER_URL=http://127.0.0.1:3000
+JWT_SECRET=secret
+
+# GOOGLE OAUTH
+GOOGLE_CLIENT_ID=[your_google_client_id]
+GOOGLE_CLIENT_SECRET=[your_google_client_secret]
+GOOGLE_CALLBACK_URL=http://127.0.0.1:3000/auth/google/callback
 
 # BDD
-MONGO_URI=mongodb://127.0.0.1:27017/demo_epitech
+MONGO_PORT=27017
+MONGO_HOSTNAME=127.0.0.1
+MONGO_COLLECTION=demo_epitech
 
 # CLIENT
 VUE_APP_PORT=8080
@@ -48,6 +56,7 @@ VUE_APP_URL=http://127.0.0.1:8080
 # API
 API_GEOGRAPHIE=https://geo.api.gouv.fr
 ```
+NB: remplacer les variables entre [ ]
 ## Exécution du Projet
 
 ```shell

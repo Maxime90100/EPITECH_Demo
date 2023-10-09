@@ -33,7 +33,7 @@ export default {
           username: this.username,
           password: this.password,
         });
-        this.registered = true;
+        if(!response.error) this.registered = true;
         this.resetData();
       } catch (e) {}
     },
