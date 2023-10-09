@@ -11,7 +11,7 @@ export default function initializeSocket(server) {
     });
 
     io.on("connection", (socket) => {
-        console.log("client connexion");
+        //console.log("client connexion");
 
         socket.on("sensorData", async (data) => {
             io.emit("sensorData", data);
@@ -28,7 +28,7 @@ export default function initializeSocket(server) {
         });
 
         socket.on("disconnect", () => {
-            console.log("client deconnexion");
+            //console.log("client deconnexion");
         });
     });
 }

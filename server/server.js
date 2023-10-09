@@ -1,12 +1,16 @@
 import { fileURLToPath } from 'url';
-import path from "path";
-import dotenv from "dotenv";
-import express from "express";
-import cors from "cors";
-import router from "./routes/index.js";
-import http from "http";
-import initializeSocket from "./services/socket.js";
-import mongoose from "mongoose";
+import path from 'path';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import express from 'express';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import passport from './services/passport.js';
+import cors from 'cors';
+import router from './routes/index.js';
+import http from 'http';
+import initializeSocket from './services/socket.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,11 +28,31 @@ mongoose.connect(process.env.MONGO_URI, {
     });
 
 const app = express();
-const server = http.createServer(app);
-initializeSocket(server)
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
 
-app.use(cors());
+app.use(
+    session({
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false }
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(cors({
+    origin: process.env.VUE_APP_URL,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+}));
+
 app.use('/', router);
+
+const server = http.createServer(app);
+initializeSocket(server);
 
 server.listen(process.env.SERVER_PORT, process.env.SERVER_HOSTNAME, (err) => {
     if (err) {

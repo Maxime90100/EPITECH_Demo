@@ -21,6 +21,7 @@ export default {
         {name:'Accueil',icon:'mdi-home',color:'primary',href:'/'},
         {name:'Carte',icon:'mdi-map',color:'primary',href:'/map'},
         {name:'Capteurs',icon:'mdi-sun-thermometer-outline',color:'primary',href:'/sensors'},
+        {name:'Blog',icon:'mdi-post-outline',color:'primary',href:'/blog'},
       ]
     }
   },

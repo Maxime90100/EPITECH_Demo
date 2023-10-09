@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import home from "@/views/home.vue";
 import map from "@/views/map.vue";
 import sensors from "@/views/sensors.vue";
-import io from "socket.io-client";
+import blog from "@/views/blog.vue"
 
 const routes = [
     {
@@ -19,6 +19,11 @@ const routes = [
         path: '/sensors',
         name: 'Sensors',
         component: sensors
+    },
+    {
+        path: '/blog',
+        name: 'Blog',
+        component: blog
     },
     {
         path: '/:catchAll(.*)',

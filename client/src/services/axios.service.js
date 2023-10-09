@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from "@/store";
 
 const API = axios.create({
     baseURL: process.env.SERVER_URL
@@ -6,9 +7,12 @@ const API = axios.create({
 
 API.interceptors.request.use(
     config => {
+        const token = localStorage.getItem('token');
         return {
             ...config,
-            headers: {}
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }
     },
     error => {
@@ -18,6 +22,7 @@ API.interceptors.request.use(
 
 API.interceptors.response.use(
     res => {
+        store.commit('popupModule/setSuccess',res.data.message)
         return res
     },
     error => {
@@ -26,8 +31,9 @@ API.interceptors.response.use(
 )
 
 function handleError(serviceName, err) {
-    console.error(err);
     if (err.response) {
+        const error = err.response.data.message
+        store.commit('popupModule/setError',error)
         return {
             data: {
                 error: 1,
@@ -37,18 +43,22 @@ function handleError(serviceName, err) {
         };
     }
     else if (err.request) {
+        const error = 'Le serveur est injoignable ou l\'URL demandée n\'existe pas'
+        store.commit('popupModule/setError',error)
         return {
             data: {
                 error: 1,
-                data: 'Le serveur est injoignable ou l\'URL demandée n\'existe pas'
+                data: error
             }
         };
     }
     else {
+        const error = 'Erreur inconnue'
+        store.commit('popupModule/setError',error)
         return {
             data: {
                 error: 1,
-                data: 'Erreur inconnue'
+                data: error
             }
         };
     }

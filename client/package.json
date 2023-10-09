@@ -14,7 +14,10 @@
     "dotenv": "^16.3.1",
     "socket.io-client": "^4.7.2",
     "vue": "^3.3.4",
+    "vue-cookies": "^1.8.3",
+    "vue-google-oauth2": "^1.5.10",
     "vue-router": "^4.2.5",
+    "vue3-google-oauth2": "^1.0.7",
     "vuetify": "^3.3.16",
     "vuex": "^4.1.0",
     "vuex-persistedstate": "^4.1.0"
