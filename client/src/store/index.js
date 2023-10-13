@@ -1,8 +1,8 @@
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 import geographieModule from "@/store/geographie.module";
-import vuetify from "@/plugins/vuetify";
 import popupModule from "@/store/popup.module";
+import blogModule from "@/store/blog.module";
 
 const store = new Vuex.Store({
     state: {
@@ -29,7 +29,8 @@ const store = new Vuex.Store({
     },
     modules: {
         geographieModule,
-        popupModule
+        popupModule,
+        blogModule
     },
     plugins: [createPersistedState()],
 });

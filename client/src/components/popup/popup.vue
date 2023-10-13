@@ -13,7 +13,6 @@
   <v-alert
       v-if="success"
       type="success"
-      title="Succès"
       :text="success"
       density="compact"
       style="width: 80vw; margin-left: 10vw"

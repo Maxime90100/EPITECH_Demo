@@ -39,7 +39,7 @@ export default {
         >
           <v-img
               src="src/assets/images/logo.jpg"
-              alt="Maxime THEVENEAU"
+              alt="Logo"
           ></v-img>
         </v-avatar>
       </template>

@@ -22,7 +22,8 @@ API.interceptors.request.use(
 
 API.interceptors.response.use(
     res => {
-        store.commit('popupModule/setSuccess',res.data.message)
+        if(res.data.message)
+            store.commit('popupModule/setSuccess',res.data.message)
         return res
     },
     error => {
@@ -34,6 +35,10 @@ function handleError(serviceName, err) {
     if (err.response) {
         const error = err.response.data.message
         store.commit('popupModule/setError',error)
+        if(err.response.status === 401){
+            // Token de connexion expiré
+            store.commit('clearUser');
+        }
         return {
             data: {
                 error: 1,
@@ -99,11 +104,21 @@ async function putRequest(service, data, name) {
     }
     return response.data;
 }
+async function deleteRequest(service, data, name) {
+    let response = null
+    try {
+        response = await API.delete(service, data)
+    } catch (err) {
+        response = handleError(name, err);
+    }
+    return response.data;
+}
 
 export {
     getRequest,
     postRequest,
     patchRequest,
-    putRequest
+    putRequest,
+    deleteRequest
 }
 
