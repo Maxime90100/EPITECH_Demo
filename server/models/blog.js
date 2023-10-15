@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
+import moment from "moment-timezone";
 
 const messageSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     text: String,
-    createdAt: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: () => moment().format() },
 });
 
 const blogSchema = new mongoose.Schema({

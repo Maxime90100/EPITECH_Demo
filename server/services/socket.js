@@ -1,8 +1,9 @@
 import { Server } from "socket.io";
 import { SensorData } from '../models/sensorData.js';
 
+let io;
 export default function initializeSocket(server) {
-    const io = new Server(server, {
+    io = new Server(server, {
         transports: ['websocket', 'polling'],
         cors: {
             origin: "*",
@@ -32,3 +33,5 @@ export default function initializeSocket(server) {
         });
     });
 }
+
+export function getIo() {return io;}

@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'url';
 import path from 'path';
 import dotenv from 'dotenv';
+import moment from 'moment-timezone';
 import mongoose from 'mongoose';
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -15,6 +16,7 @@ import initializeSocket from './services/socket.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, '../.env') });
+moment.tz.setDefault('Europe/Paris');
 
 const MONGO_URI = `mongodb://${process.env.MONGO_HOSTNAME}:${process.env.MONGO_PORT}/${process.env.MONGO_COLLECTION}`
 mongoose.connect(MONGO_URI, {

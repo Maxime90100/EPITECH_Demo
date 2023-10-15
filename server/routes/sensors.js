@@ -1,6 +1,7 @@
 import express from "express";
-import dotenv from "dotenv";
-import {SensorData} from "../models/sensorData.js"; dotenv.config();
+import dotenv from "dotenv"; dotenv.config();
+import {SensorData} from "../models/sensorData.js";
+import {getIo} from "../services/socket.js"
 
 const sensorsRouter = express.Router();
 
@@ -25,6 +26,22 @@ sensorsRouter.get('/data/delete', async (req, res) => {
             console.error("Erreur lors de la suppression : ", error);
             res.status(500).json({ error: "Erreur lors de la suppression" });
         });
+});
+sensorsRouter.post('/add', async (req, res) => {
+    const {temperature,humidity} = req.body;
+    const data = {
+        temperature: temperature.toFixed(2),
+        humidity: humidity.toFixed(2),
+        timestamp: Date.now()
+    }
+    const newSensorData = new SensorData(data);
+    try {
+        await newSensorData.save();
+        getIo().emit("sensorData", data);
+    } catch (err) {
+        console.error('Erreur lors de l\'enregistrement des données', err);
+    }
+    res.status(200).json({temperature,humidity});
 });
 
 
